@@ -1,16 +1,19 @@
-import { Spinner } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./Pages/HomePage";
+import Login from "./components/authentication/Login";
+import SignUp from "./components/authentication/SignUp";
 
 const ChatPage = lazy(() => import("./Pages/ChatPage"));
 
 function App() {
     return (
-        <div className="App">
+        <Box className="App" fontFamily="Poppins">
             <Routes>
                 <Route path="/" element={<HomePage />} />
+
                 <Route
                     path="/chats"
                     element={
@@ -20,7 +23,7 @@ function App() {
                     }
                 />
             </Routes>
-        </div>
+        </Box>
     );
 }
 

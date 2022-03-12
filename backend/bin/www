@@ -8,11 +8,17 @@ var app = require("../app");
 var debug = require("debug")("mern-chat-app:server");
 var http = require("http");
 var dotenv = require("dotenv");
+const connectdb = require("../config/db");
 
 /**
  * Get environment properties from .env
  */
 dotenv.config();
+
+/**
+ * Connect to Mongo DB
+ */
+connectdb();
 
 /**
  * Get port from environment and store in Express.
