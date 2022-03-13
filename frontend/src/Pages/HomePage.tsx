@@ -1,9 +1,19 @@
 import { Box, Button, Container, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Login from "../components/authentication/Login";
 import SignUp from "../components/authentication/SignUp";
 
 const HomePage = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
+
+        if (userInfo._id) {
+            navigate("/chats");
+        }
+    }, [navigate]);
     const [loginMode, setLoginMode] = useState(true);
 
     return (
