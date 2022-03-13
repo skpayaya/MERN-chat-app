@@ -62,4 +62,21 @@ const authUser = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { registerUser, authUser };
+// /api/user?search=skpsashi
+const allUsers = asyncHandler(async (req, res) => {
+    const searchQueryParam = req.query.search
+        ? {
+              $or: [
+                  { name: { $regex: req.query.search, $options: "i" } },
+                  { email: { $regex: req.query.search, $options: "i" } },
+              ],
+          }
+        : {};
+
+    const users = await User.find(searchQueryParam).find({
+        _id: { $ne: req.user._id },
+    });
+    res.send(users);
+});
+
+module.exports = { registerUser, authUser, allUsers };
